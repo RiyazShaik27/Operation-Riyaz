@@ -1,0 +1,51 @@
+import { chromium } from '@playwright/test';
+import { mkdir, writeFile } from 'node:fs/promises';
+import path from 'node:path';
+
+const label = process.argv[2] || 'before';
+const out = path.resolve('evidence', label);
+await mkdir(out, { recursive: true });
+const browser = await chromium.launch({ channel: 'chrome', headless: true, args: ['--enable-webgl'] });
+const context = await browser.newContext({ viewport: { width: 1649, height: 928 } });
+const page = await context.newPage();
+const errors = [];
+page.on('pageerror', error => errors.push(error.message));
+const shot = async name => { await page.screenshot({ path: path.join(out, `${name}.png`) }); console.log(`Captured ${name}`); };
+const scrollNext=async()=>{await page.waitForTimeout(1000);await page.mouse.move(8,350);await page.mouse.wheel(0,900);};
+try {
+  await page.goto('http://127.0.0.1:4173/', { waitUntil: 'networkidle', timeout: 60000 });
+  await page.locator('canvas').waitFor();
+  await page.waitForTimeout(4500);
+  await shot('01-establishing');
+  await scrollNext();
+  await page.waitForTimeout(2400);
+  await shot('02-transmission');
+  await page.getByRole('button', {name:'Expand incoming message',exact:true}).click();
+  await shot('02b-transmission-expanded');
+  await page.getByRole('button', {name:'Collapse incoming message',exact:true}).click();
+  await page.getByTestId('accept-mission').click();
+  await page.getByTestId('recon-terminal').waitFor();
+  await page.waitForTimeout(1700);
+  await shot('03-investigation');
+  await page.waitForTimeout(1700);
+  await shot('03b-operator-response');
+  await page.getByTestId('breach-screen').waitFor();
+  await page.waitForTimeout(850);
+  await shot('04-breach');
+  await page.getByTestId('profile-reveal').waitFor();
+  await page.waitForTimeout(3000);
+  await shot('05-profile');
+  await page.waitForTimeout(1600);await scrollNext();await page.getByTestId('archive-carousel').waitFor();
+  await page.waitForTimeout(3000);
+  await shot('06-archives');
+  await page.getByTestId('carousel-projects').click();
+  await page.waitForTimeout(240);
+  await shot('07-opening');
+  await page.getByTestId('archive-document').waitFor();
+  await page.waitForTimeout(900);
+  await shot('08-dossier');
+  await writeFile(path.join(out, 'browser-errors.json'), JSON.stringify(errors, null, 2));
+} finally {
+  await context.close();
+  await browser.close();
+}

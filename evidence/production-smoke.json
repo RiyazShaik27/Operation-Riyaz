@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "httpStatus": 200,
+  "humanAsset": true,
+  "story": true,
+  "acceptButton": true,
+  "scrollStory": true,
+  "acceptEnablesSound": true,
+  "suppliedBreachClip": true,
+  "singleTheme": true,
+  "archives": 7,
+  "uncaughtErrors": []
+}

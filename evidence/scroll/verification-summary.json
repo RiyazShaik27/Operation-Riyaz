@@ -1,0 +1,33 @@
+{
+  "version": "1.8.0",
+  "testsPassed": 27,
+  "testsFailed": 0,
+  "viewports": [
+    "1920x1080",
+    "1649x928",
+    "1366x768",
+    "1280x720",
+    "390x844"
+  ],
+  "productionBuild": true,
+  "assetIntegrity": true,
+  "productionBrowser": {
+    "passed": true,
+    "httpStatus": 200,
+    "humanAsset": true,
+    "story": true,
+    "communicatorExpansion": true,
+    "scrollStory": true,
+    "singleTheme": true,
+    "archives": 7,
+    "uncaughtErrors": []
+  },
+  "browserCaptureErrors": [],
+  "audio": {
+    "peak": 0.16505403816699982,
+    "rms": 0.018746073255545864,
+    "durationSeconds": 3,
+    "clipping": false
+  },
+  "autoplay": "Enabled by default; a tap/click/keypress may be required by browser policy. Wheel-only input is not user activation in strict browsers."
+}

@@ -1,0 +1,205 @@
+/* v1.7: composition, material readability and one continuous spatial archive. */
+.app-frame .scene-root .scene-vignette{background:linear-gradient(0deg,#070a13ad,transparent 23%,transparent 80%,#080b1555)}
+.app-frame.phase-landing .scene-root .scene-vignette{background:linear-gradient(90deg,#070a13dd 0%,#070a1380 30%,transparent 60%),linear-gradient(0deg,#070a13a6,transparent 35%)}
+.global-noise{opacity:.025}
+.scene-root::after{display:none!important}
+.film-bar{height:5px}
+.hud-corner,.live-readout{opacity:.45}
+.story-breach:before{background:linear-gradient(90deg,#56141c15,#2c0b1466);animation:none}
+.breach-display h2{animation:none;text-shadow:none}
+.breach-rings{display:none}
+.archive-carousel .holo-folder{transform-style:preserve-3d;backdrop-filter:none;box-shadow:0 10px 22px #0005!important;background:linear-gradient(145deg,#183343ed,#0c1726f5)!important;border-color:#6b9ca8}
+.archive-carousel .holo-folder.is-focused{border-color:#b5e3df;box-shadow:0 12px 28px #0008!important}
+.archive-carousel .holo-folder:after{animation:none;opacity:.3}
+.folder-ghost.back{transform:translate3d(0,-4px,-26px);opacity:.3}
+.folder-ghost.mid{transform:translate3d(0,-2px,-13px);opacity:.45}
+.folder-data{opacity:.12}
+.theme-ember .archive-carousel .holo-folder{background:linear-gradient(145deg,#40302aed,#211b25f5)!important}
+.archive-flight-ghost{display:none}
+.archive-full:before{display:none}
+.archive-workspace,.archive-full .archive-main,.archive-full .archive-sidebar{animation:none}
+.archive-main{box-shadow:0 8px 32px #0004!important}
+
+@media(min-width:1000px) and (min-height:700px){
+  .landing-inner{left:7vw;width:45vw;bottom:20%}
+  .landing-inner h1{font-size:clamp(85px,8.4vw,150px)}
+  .landing-description{max-width:410px;font-size:14px}
+  .landing-inner .left-rule{margin-bottom:30px}
+  .hero-coordinates{bottom:-100px}
+  .story-mission .mission-card,.story-recon .terminal-card{
+    left:auto;right:5vw;top:50%;width:43vw;max-width:730px;
+    transform:translateY(-50%);background:linear-gradient(145deg,#111b2bf7,#101421f5);
+    border-color:#657080;box-shadow:0 22px 55px #0007;backdrop-filter:none;
+  }
+  .story-mission .message-content h2{font-size:clamp(42px,4vw,65px)}
+  .story-mission .message-content p{font-size:16px}
+  .story-mission .message-footer{background:transparent}
+  .story-recon .terminal-rows{height:310px;min-height:0;max-height:40vh;font-size:12px}
+  .story-profile .profile-reveal{left:auto;right:6vw;top:50%;transform:translateY(-50%);width:37vw;align-items:flex-start;overflow:visible}
+  .story-profile .reveal-image{display:none}
+  .story-profile .profile-data{text-align:left}
+  .story-profile .profile-confirm{justify-content:flex-start}
+  .story-profile .profile-data h2{font-size:clamp(64px,5.6vw,102px);line-height:1}
+  .story-profile .profile-data p{max-width:420px;font-size:14px}
+  .story-profile .profile-top{font-size:9px}
+  .app-frame:has(.webgl-fallback) .story-profile .reveal-image{display:block}
+  .story-breach .breach-display{left:51%;right:5%;align-items:flex-start;text-align:left}
+  .story-breach .breach-display h2{font-size:clamp(90px,9vw,155px)}
+  .archive-ui.archive-carousel{background:linear-gradient(0deg,#080e1ee6,transparent 32%,transparent 77%,#080e1e44)!important}
+  .archive-carousel .folder-stage{position:fixed;inset:0;width:100%;height:100%;perspective:none;transform-style:flat;pointer-events:none}
+  .archive-carousel:not(.is-opening) .holo-folder.is-spatial{
+    transform:translate(-50%,-50%) translate3d(var(--project-x),var(--project-y),0) perspective(1000px) rotateY(var(--project-yaw)) scale(var(--project-scale));
+  }
+  .archive-carousel .orbit-track,.archive-carousel .orbit-hud{display:none}
+  .archive-carousel .central-identity{position:absolute;left:50%;top:14%;transform:translateX(-50%);margin:0;gap:16px}
+  .archive-carousel .central-portrait{width:67px;height:86px;box-shadow:none}
+  .archive-carousel .central-meta h2{font-size:52px}
+  .archive-carousel .central-meta p{font-size:11px}
+  .archive-carousel .archive-kicker{position:absolute;top:10.6%;font-size:9px}
+  .archive-carousel .carousel-title{position:absolute;top:28%;width:62vw;opacity:.75}
+  .archive-carousel .open-folder{position:absolute;bottom:13%;min-width:270px}
+  .archive-carousel .orbit-indicators{position:absolute;bottom:9.5%}
+  .archive-carousel .carousel-hint{position:absolute;bottom:6.5%}
+  .archive-carousel.is-opening{--edge:clamp(18px,3vw,52px);--directory:clamp(210px,20vw,285px)}
+  .archive-carousel.is-opening .folder-stage{perspective:none;isolation:auto}
+  .archive-carousel.is-opening .holo-folder{
+    position:fixed;left:calc(100vw - var(--edge) - var(--directory) + 15px);top:calc(242px + var(--file-index) * 62px);
+    width:calc(var(--directory) - 30px);height:54px;transform:none;opacity:1;padding:12px;
+    display:flex;flex-direction:row;align-items:center;gap:10px;
+  }
+  .archive-carousel.is-opening .holo-folder strong{font-size:19px}
+  .archive-carousel.is-opening .holo-folder svg{width:18px;height:18px;flex-shrink:0}
+  .archive-carousel.is-opening .folder-serial,.archive-carousel.is-opening .folder-code,.archive-carousel.is-opening .folder-data,.archive-carousel.is-opening .folder-tech,.archive-carousel.is-opening .folder-ghost{display:none}
+  .archive-carousel.is-opening .holo-folder.is-opening-file{
+    left:var(--edge);top:93px;width:calc(100vw - var(--edge) * 2 - var(--directory) - 17px);height:calc(100dvh - 121px);
+    padding:clamp(22px,3vw,47px);align-items:flex-start;z-index:150!important;overflow:hidden;background:linear-gradient(127deg,#201537f6,#101628f8)!important;
+  }
+  .archive-carousel.is-opening .is-opening-file strong{font-size:clamp(43px,min(7vw,11dvh),100px);margin-top:36px}
+  .archive-carousel.is-opening .is-opening-file svg{display:none}
+  .archive-carousel.is-opening .central-identity{left:calc(100vw - var(--edge) - var(--directory) + 16px);top:115px;transform:none;width:calc(var(--directory) - 32px);gap:12px}
+  .archive-carousel.is-opening .central-portrait{width:57px;height:73px;flex-shrink:0}
+  .archive-carousel.is-opening .central-meta h2{font-size:22px;white-space:nowrap}
+  .archive-carousel.is-opening .central-meta p,.archive-carousel.is-opening .central-meta .micro{display:none}
+  .archive-carousel.is-opening .archive-kicker,.archive-carousel.is-opening .carousel-title,.archive-carousel.is-opening .open-folder,.archive-carousel.is-opening .orbit-indicators,.archive-carousel.is-opening .carousel-hint{visibility:hidden}
+}
+
+/* Compact translucent handset keeps the physical scene visible. */
+.app-frame .story-mission .communicator,.app-frame .story-recon .field-terminal{
+  left:auto;right:4vw;top:auto;bottom:10vh;transform:none;width:330px;max-width:calc(100vw - 36px);
+  max-height:calc(100dvh - 150px);padding:20px;border:1px solid #a5c4c64a;border-radius:22px;
+  background:linear-gradient(145deg,#15242b99,#07111cbd);backdrop-filter:blur(5px);
+  box-shadow:0 18px 50px #0005,inset 0 1px 0 #ffffff24;pointer-events:auto;
+}
+.device-header{display:flex;align-items:center;justify-content:space-between;gap:12px;color:#94a7b0;font:8px 'Space Mono',monospace;letter-spacing:.12em;padding-bottom:18px}
+.device-header button{display:grid;place-items:center;width:32px;height:32px;background:#a9c6d511;border:1px solid #a9c6d540;border-radius:8px;color:#d7e9ec}
+.app-frame .communicator .message-meta{font-size:9px;padding-bottom:14px;flex-wrap:wrap;gap:8px}
+.app-frame .communicator .message-meta svg{width:14px}
+.app-frame .communicator .live-blink{font-size:8px;animation:none}
+.app-frame .communicator .message-sender{gap:12px;padding:14px 0;font-size:9px}
+.app-frame .communicator .message-sender small{display:block;margin-top:6px;font-size:8px}
+.app-frame .communicator .message-content{padding:22px 0 8px}
+.app-frame .communicator .message-content .eyebrow{font-size:8px;letter-spacing:.08em}
+.app-frame .communicator .message-content h2{font-size:40px;margin:14px 0}
+.app-frame .communicator .message-content p{font-size:13px;line-height:1.65;margin-bottom:12px;color:#d2dfe4}
+.app-frame .communicator .message-footer{display:flex;flex-direction:column-reverse;align-items:stretch;gap:14px;background:none;padding:8px 0 0}
+.app-frame .communicator .message-footer>span{font-size:7px;justify-content:center}
+.app-frame .communicator .primary-action{border-radius:8px;font-size:10px;box-shadow:none}
+.app-frame .story-mission .communicator.is-expanded{width:540px;background:linear-gradient(145deg,#15242bd9,#07111ce8)}
+.app-frame .communicator.is-expanded .message-content p{font-size:17px}
+.app-frame .communicator.is-expanded .message-content h2{font-size:60px}
+.app-frame .story-recon .field-terminal{width:400px;padding:16px 20px;bottom:10vh}
+.app-frame .field-terminal .device-header{padding-bottom:8px}
+.app-frame .field-terminal .terminal-header{padding:10px 0;font-size:9px}
+.app-frame .field-terminal .terminal-header>span:last-child{display:none}
+.app-frame .field-terminal .terminal-rows{padding:14px 0;height:98px;min-height:0;max-height:40vh;font-size:10px;letter-spacing:0;line-height:1.8;overflow:auto}
+.app-frame .field-terminal .terminal-footer{padding:8px 0;font-size:7px;gap:14px}
+.app-frame .field-terminal .progress-track{height:2px;background:#ffffff15}
+.app-frame .field-terminal .progress-track>div{box-shadow:none}
+.app-frame .story-recon .field-terminal.is-expanded{width:540px;background:#0b1926e8}
+.app-frame .field-terminal.is-expanded .terminal-rows{height:290px}
+@media(max-width:680px){
+  .app-frame .story-mission .communicator{right:18px;bottom:64px;width:calc(100vw - 36px);padding:14px 18px;max-height:56dvh;border-radius:18px}
+  .communicator .device-header{padding-bottom:6px}
+  .app-frame .communicator .message-sender{display:none}
+  .app-frame .communicator .message-content{padding:12px 0 0}
+  .app-frame .communicator .message-content h2{font-size:34px;margin:9px 0}
+  .app-frame .communicator .message-content p{font-size:12px;margin-bottom:8px}
+  .app-frame .story-mission .communicator.is-expanded{max-height:calc(100dvh - 150px)}
+  .app-frame .story-recon .field-terminal{right:18px;bottom:64px;max-height:52dvh}
+}
+@media(max-height:699px) and (min-width:681px){
+  .app-frame .story-mission .communicator{bottom:45px;max-height:calc(100dvh - 125px)}
+  .communicator .device-header{padding-bottom:4px}
+  .app-frame .communicator .message-content{padding:12px 0 0}
+  .app-frame .communicator .message-sender{display:none}
+}
+
+/* v1.8 — scroll-directed chapters, one atmosphere, restrained alert movement. */
+.entry-scroll{display:flex;align-items:center;gap:13px;flex-wrap:wrap;margin-top:32px;color:#d0e2e7;font:10px 'Space Mono',monospace;letter-spacing:.08em}
+.entry-scroll small{display:block;width:100%;padding-left:27px;color:#81949e;font-size:8px;letter-spacing:.1em}
+.scroll-stem{position:relative;width:13px;height:25px;border:1px solid #95bec388;border-radius:8px}
+.scroll-stem:after{content:'';position:absolute;left:5px;top:5px;width:1px;height:7px;background:#b9f5ee;animation:scroll-cue 1.8s ease-in-out infinite}
+.scroll-action{display:flex;gap:16px;align-items:center;justify-content:space-between;margin:5px 0;padding:13px 0;color:#abede5;font:9px 'Space Mono',monospace;letter-spacing:.08em;border-top:1px solid #a8c8cf33}
+.scroll-action>span{font-size:23px;line-height:1}
+.app-frame .communicator .message-footer{flex-direction:column;align-items:stretch;gap:9px}
+.app-frame .communicator .message-footer>span{order:2}
+.profile-scroll{margin-top:14px;min-width:300px}
+.mission-accepted{display:flex;gap:9px;align-items:center;color:#a9eee0;padding:8px 0 14px;font:11px 'Space Mono',monospace;letter-spacing:.1em}
+.app-frame .story-mission .communicator{animation:transmission-arrival .52s ease-out .2s both}
+.story-profile .profile-scroll{animation:chapter-arrive .65s ease 1.4s both}
+.story-breach .breach-display>svg{animation:alarm-impact .45s ease-out}
+@keyframes scroll-cue{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(5px);opacity:1}}
+@keyframes transmission-arrival{0%,100%{translate:0}20%{translate:-4px 0}40%{translate:4px 0}60%{translate:-2px 0}80%{translate:2px 0}}
+@keyframes alarm-impact{0%,100%{translate:0}25%{translate:-4px 0}50%{translate:4px 0}75%{translate:-2px 0}}
+@keyframes chapter-arrive{from{opacity:0;translate:0 6px}to{opacity:1;translate:0}}
+.reduce-motion .scroll-stem:after,.reduce-motion .story-mission .communicator,.reduce-motion .profile-scroll,.reduce-motion .breach-display>svg{animation:none!important}
+@media(max-width:680px){.entry-scroll{font-size:9px;line-height:1.8}.profile-scroll{min-width:0;max-width:90vw;width:100%;font-size:8px}.entry-scroll small{font-size:7px}}
+
+.app-frame .communicator .message-footer .accept-audio-hint{display:block;text-align:center;border:0;padding:0;margin:0;color:#95b1bb;font-size:7px;line-height:1.6;letter-spacing:.04em}
+.app-frame .communicator .message-footer{gap:9px}
+.app-frame .communicator .message-footer>span{margin-top:3px}
+
+/* Archive records open in a reading surface above the scene and its controls. */
+.archive-detail-hint{font:9px/1.8 'Space Mono',monospace;letter-spacing:.08em;color:#a9bbc7;margin:0 0 18px}
+.expandable-record{cursor:pointer;transition:border-color .2s,background .2s}
+.expandable-record:hover,.expandable-record:focus-within{border-color:#a9a0cf!important}
+.record-expand{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:44px;margin-top:22px;padding:12px 0 0;border-top:1px solid #81759c66;background:transparent;color:#a3eee5;text-align:left;font:10px/1.5 'Space Mono',monospace;letter-spacing:.06em}
+.record-expand:hover{color:#fff}
+.record-section h4{font:10px/1.6 'Space Mono',monospace;letter-spacing:.12em;color:#a9b9ca;margin:0 0 12px}
+.intel-record .record-section h4{display:none}
+.record-dialog{position:fixed;inset:0;width:min(1000px,calc(100vw - 64px));height:min(830px,calc(100dvh - 64px));max-width:none;max-height:none;margin:auto;padding:0;border:1px solid #827399;border-radius:16px;background:#141222;color:#edf1fa;box-shadow:0 30px 100px #0009;overflow:hidden}
+.record-dialog::backdrop{background:#030711c9;backdrop-filter:blur(8px)}
+.record-dialog-shell{display:flex;flex-direction:column;height:100%;min-height:0;animation:record-arrive .22s ease-out}
+.record-dialog-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:15px 24px;border-bottom:1px solid #81759c55;background:#1b192c;flex-shrink:0;font:10px/1.5 'Space Mono',monospace;letter-spacing:.08em;color:#b2b4cc}
+.record-dialog-toolbar button{display:flex;align-items:center;justify-content:center;gap:8px;min-width:44px;min-height:44px;background:#27243b;border:1px solid #686079;border-radius:6px;color:#eff4ff;font:10px 'Space Mono',monospace;padding:9px 14px;flex-shrink:0}
+.record-dialog-toolbar button:hover{border-color:#a3eee5}
+.record-dialog-scroll{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-gutter:stable;scrollbar-width:thin;scrollbar-color:#807595 #171323;padding:clamp(24px,4vw,54px);touch-action:pan-y}
+.record-dialog-heading{border-bottom:1px solid #81759c55;padding-bottom:26px;margin-bottom:30px}
+.record-dialog-heading h2{font-size:clamp(34px,4.4vw,62px);font-weight:700;line-height:1.05;letter-spacing:.015em;margin:15px 0 0;overflow-wrap:anywhere}
+.record-dialog-heading h2:focus{outline:none}
+.record-dialog-content .record-paragraph,.record-dialog-content .muted-copy{font-size:17px;line-height:1.85;color:#c4cfde;max-width:74ch}
+.record-dialog-content .case-type{font-size:12px;line-height:1.8;display:block;margin-bottom:24px}
+.record-dialog-content .record-section{padding:10px 0 25px;margin-bottom:25px;border-bottom:1px solid #81759c44}
+.record-dialog-content .record-section:last-child{margin-bottom:0;border-bottom:0}
+.record-dialog-content .chip{font-size:13px;line-height:1.5;padding:10px 14px;background:#22243b;border-color:#53526d;color:#d3e9ee;max-width:100%;overflow-wrap:anywhere}
+.record-dialog-content .tag-cloud{gap:10px}
+.record-dialog-content .data-link{font-size:12px;min-height:44px;padding:10px 0;overflow-wrap:anywhere}
+.record-dialog-content .identity-grid strong{font-size:15px;line-height:1.6}
+.record-dialog-content .profile-grid{gap:30px}
+.record-dialog-content .record-icon{width:36px;height:36px}
+.record-dialog-content .small-copy{display:block;font-size:13px}
+.record-dialog-content .credential-full-image{display:block;width:100%;height:auto;margin:20px 0;border:1px solid #686079}
+.record-dialog-footer{display:flex;align-items:center;justify-content:center;gap:10px;flex-shrink:0;min-height:42px;padding:10px 18px;border-top:1px solid #81759c55;color:#9ca9bc;font:9px/1.5 'Space Mono',monospace;letter-spacing:.06em}
+@keyframes record-arrive{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:680px){
+  .record-dialog{width:calc(100vw - 16px);height:calc(100dvh - 24px);border-radius:12px}
+  .record-dialog-toolbar{padding:8px 14px;font-size:8px;letter-spacing:.04em}
+  .record-dialog-toolbar button{padding:8px 10px}
+  .record-dialog-scroll{padding:25px 20px}
+  .record-dialog-heading{padding-bottom:20px;margin-bottom:22px}
+  .record-dialog-content .record-paragraph,.record-dialog-content .muted-copy{font-size:16px;line-height:1.8}
+  .record-dialog-content .profile-grid{grid-template-columns:1fr}
+  .record-dialog-content .identity-grid{grid-template-columns:1fr}
+  .record-dialog-footer{font-size:8px;letter-spacing:0}
+}
+@media(prefers-reduced-motion:reduce){.record-dialog-shell{animation:none}}

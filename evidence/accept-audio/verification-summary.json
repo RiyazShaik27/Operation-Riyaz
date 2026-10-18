@@ -1,0 +1,29 @@
+{
+  "version": "1.8.1",
+  "focusedAudioAndGestureChecksPassed": 7,
+  "archiveAndSettingsRegressionsPassed": 4,
+  "productionBuild": true,
+  "assetCheck": true,
+  "productionBrowser": {
+    "passed": true,
+    "httpStatus": 200,
+    "humanAsset": true,
+    "story": true,
+    "acceptButton": true,
+    "scrollStory": true,
+    "acceptEnablesSound": true,
+    "suppliedBreachClip": true,
+    "singleTheme": true,
+    "archives": 7,
+    "uncaughtErrors": []
+  },
+  "uncaughtCaptureErrors": [],
+  "suppliedClip": {
+    "bytes": 80248,
+    "unchangedInPublicAndProduction": true,
+    "sha256": "e9e48bb7fcd2eb03e5344aec05baa0839ae515c68ed6d666216772272f418cb6",
+    "decodedSeconds": 2.50775,
+    "breachHoldSeconds": 2.8
+  },
+  "audioVerification": "Strict Chrome autoplay policy; post-master live output, running AudioContext, full supplied buffer playback, mute and replay cancellation at desktop and two phone sizes. The preceding 27-test full-suite report is historical."
+}

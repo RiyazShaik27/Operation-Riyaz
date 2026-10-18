@@ -1,0 +1,17 @@
+{
+  "verifiedChecks": 24,
+  "initialPasses": 23,
+  "previewReloadInterruptions": 1,
+  "passedOnRerun": 1,
+  "outstandingFailures": 0,
+  "productionBuild": true,
+  "assetIntegrity": true,
+  "productionBrowserSmoke": true,
+  "browserCaptureErrors": [],
+  "reports": {
+    "full": "full-regression-results.json",
+    "rerun": "story-rerun-results.json",
+    "production": "../production-smoke.json"
+  },
+  "note": "The full-suite story case was interrupted by a development preview reload. Its original trace is retained in preview-reload-trace.zip. The same unchanged test passed on an isolated rerun."
+}

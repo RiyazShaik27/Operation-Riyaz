@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.pages-check/
+playwright-report/
+test-results/
+.env*
+*.log
+.DS_Store
+.asset-work/
